@@ -17,13 +17,21 @@
     });
   }
 
+  // 숫자에 쉼표를 안 찍고 검색하는 경우가 많다 ("12100" → "12,100")
+  const loose = (text) => text.replace(/,/g, '').replace(/\s+/g, ' ');
+
   function applyFilters() {
     const query = search.value.trim().toLocaleLowerCase('ko');
+    const looseQuery = loose(query);
     let visible = 0;
     cards.forEach((card) => {
+      const haystack = card.dataset.search;
+      const hit = !query
+        || haystack.includes(query)
+        || loose(haystack).includes(looseQuery);
       const match = (kind === 'all' || card.dataset.kind === kind)
         && (network === 'all' || card.dataset.network === network)
-        && (!query || card.dataset.search.includes(query));
+        && hit;
       card.hidden = !match;
       if (match) visible += 1;
     });
