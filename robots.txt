@@ -5,3 +5,4 @@ User-agent: Yeti
 Allow: /
 
 Sitemap: https://1mintelecom.com/sitemap.xml
+Sitemap: https://1mintelecom.com/rss.xml
