@@ -5,5 +5,9 @@
  "wave_size": {
   "first": 18,
   "rest": 12
+ },
+ "hold": {
+  "until": "2026-10-13",
+  "reason": "대표 결정 2026-09-22: 1차수 18장 3주 관찰 후 판정. launchd 자동 공개 unload 상태. 재개: launchctl load ~/Library/LaunchAgents/com.1mintelecom.release-regions.plist"
  }
 }
