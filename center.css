@@ -55,3 +55,110 @@ dialog#reserve-dialog::backdrop{background:#17223b8c}
 .region-links small{font-size:11px;color:var(--blue);background:#edf2ff;border-radius:4px;padding:2px 6px;margin-left:6px}
 @media(max-width:1000px){.region-hub{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.region-hub{grid-template-columns:1fr;gap:16px}}
+
+/* ===== 지역 페이지 통일 템플릿 (2026-09-22) — .region-* =====
+   기존 팔레트(--blue/--ink/--muted/--line/--light)와 카드 모양을 그대로 쓴다.
+   섹션이 7개에서 14개로 늘어 세로 여백을 줄였다. 360px 에서 가로 스크롤 금지. */
+.region-page .section{padding-top:62px;padding-bottom:62px}
+.region-page .subhero{padding:52px 0 46px}
+.region-page .subhero h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-2.2px;margin:14px 0 18px}
+.region-page .info-card h3{font-size:21px;letter-spacing:-.6px;margin:14px 0 10px}
+.region-page .info-card>p,.region-page .info-card li{font-size:15px}
+.region-page h2{font-size:30px;margin-bottom:22px}
+.region-page .cta-panel{margin-top:0}
+
+/* 브레드크럼 — 텍스트였던 것을 링크로 (버그 B3) */
+.region-crumb{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--muted);margin:0 0 6px}
+.region-crumb a{color:var(--blue);border-bottom:1px solid transparent}
+.region-crumb a:hover{border-bottom-color:currentColor}
+.region-crumb span[aria-hidden]{color:#b4bfd2}
+.region-crumb [aria-current]{color:var(--ink)}
+
+/* 핵심 요약 박스 */
+.region-summary{background:var(--light);border:1px solid #dbe3f5;border-left:5px solid var(--blue);border-radius:18px;padding:28px 30px}
+.region-summary .label{display:inline-block;margin:0 0 14px}
+.region-summary-list{list-style:none;padding:0;margin:0;display:grid;gap:13px}
+.region-summary-list li{position:relative;padding-left:28px;font-size:16px;line-height:1.75}
+.region-summary-list li:before{content:'✓';position:absolute;left:0;top:0;color:var(--blue);font-weight:900}
+
+/* 개통 경로 2지선다 */
+.region-paths .region-path{display:flex;flex-direction:column}
+.region-paths .region-path p{flex:1;color:var(--muted);font-size:15px}
+.region-paths .region-path.primary{border-color:var(--blue);box-shadow:0 10px 30px #2b55ed14}
+.region-paths .button,.region-paths .outline-button{margin-top:14px}
+
+/* 개통 절차 */
+.region-steps+.region-steps{margin-top:34px}
+.region-steps h3{font-size:19px;margin:0 0 6px;color:var(--blue)}
+.number-list.compact li{padding:16px 0 16px 60px}
+.number-list.compact li:before{top:13px;font-size:22px}
+
+/* 유심 구매처 */
+.label.net{font-size:12px;letter-spacing:.04em}
+.label.net.kt{background:#ddf7f3;color:#067d70}
+.label.net.lg{background:#fce7ee;color:#ab174d}
+.region-usim h3 small{font-size:13px;font-weight:600;color:var(--muted);margin-left:6px}
+.region-price-note{margin:22px 0 0;font-size:15px;color:var(--muted)}
+
+/* 요금제 카드 4개 */
+.region-plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+.region-plan{border:1px solid var(--line);border-radius:18px;padding:24px 22px;background:#fff;display:flex;flex-direction:column}
+.region-plan.featured{border:2px solid var(--blue);padding:23px 21px;background:#f8faff}
+.region-plan .plan-type{align-self:flex-start;font-size:12px}
+.region-plan-price{font-size:25px;font-weight:900;letter-spacing:-1.2px;margin:16px 0 2px;line-height:1.25}
+.region-plan h3{font-size:15px;font-weight:700;color:var(--blue);margin:0 0 10px}
+.region-plan p:last-child{font-size:13.5px;color:var(--muted);margin:0;line-height:1.7}
+.region-plan-note{margin:20px 0 0;font-size:14px;color:var(--muted)}
+
+/* 사실 표 */
+.region-table-wrap{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.region-table{width:100%;border-collapse:collapse;font-size:15px;table-layout:fixed}
+.region-table th,.region-table td{padding:15px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.region-table tr:last-child th,.region-table tr:last-child td{border-bottom:0}
+.region-table th{width:33%;background:var(--light);font-weight:700;color:var(--ink)}
+.region-table td{color:var(--muted)}
+
+/* 관련 검색어 */
+.region-kw{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:9px}
+.region-kw li{background:#edf2ff;color:#2f4a9e;border-radius:999px;padding:8px 15px;font-size:14px;font-weight:600}
+
+/* 이미지 */
+.region-figure{margin:0 0 26px}
+.region-figure img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line)}
+.region-figure.small img{max-width:560px}
+
+/* 12주제 묶음 · 인근 지역 · 마무리 CTA */
+.topic-stack{display:grid;gap:22px}
+.region-links li.parent a{font-weight:800;color:var(--blue)}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cta-panel .button.ghost{background:transparent;color:#fff;border-color:#7d97e8}
+.cta-panel .button.ghost:hover{background:#ffffff1f}
+.cta-foot{font-size:13px;margin:20px auto 0}
+
+@media(max-width:1000px){
+  .region-plan-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .region-page .section{padding-top:42px;padding-bottom:42px}
+  .region-page .subhero{padding:34px 0 30px}
+  .region-page h2{font-size:25px;margin-bottom:18px}
+  .region-summary{padding:22px 20px;border-radius:14px}
+  .region-summary-list li{font-size:15px}
+  .region-plan-grid{grid-template-columns:1fr;gap:12px}
+  .region-figure.small img{max-width:none}
+  .region-table{font-size:14px;table-layout:auto}
+  .region-table th,.region-table td{padding:12px 13px}
+  .region-table th{width:34%}
+  .number-list.compact li{padding-left:52px}
+  .cta-actions{flex-direction:column}
+  .cta-actions .button{width:100%}
+}
+@media(max-width:420px){
+  /* 360px 에서 표가 비좁아진다 — 항목/값을 위아래로 쌓는다 */
+  .region-table,.region-table tbody,.region-table tr,.region-table th,.region-table td{display:block;width:auto}
+  .region-table tr{border-bottom:1px solid var(--line)}
+  .region-table tr:last-child{border-bottom:0}
+  .region-table th{width:auto;border-bottom:0;padding-bottom:4px;font-size:13px;color:var(--blue);background:transparent}
+  .region-table td{border-bottom:0;padding-top:0}
+  .region-table-wrap{padding:6px 4px}
+}
