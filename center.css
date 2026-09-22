@@ -43,3 +43,15 @@ dialog#reserve-dialog::backdrop{background:#17223b8c}
   .bar-item.kakao{background:#fae100;border-color:#fae100;color:#3c1e1e}
   .mobile-bar>.button{flex:1.35 1 0;display:flex;align-items:center;justify-content:center;font-size:13px;padding:8px 6px;line-height:1.25}
 }
+
+/* 지역 페이지 — 목록과 인접 지역 링크 */
+.region-hub{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+.region-hub h2{font-size:22px;margin:0 0 14px}
+.region-hub h2 small{font-size:13px;font-weight:500;color:var(--muted);margin-left:6px}
+.region-links{font-size:15px}
+.region-links li:before{content:'›';color:var(--blue);font-weight:800;left:2px}
+.region-links li{padding-left:22px}
+.region-links a:hover{color:var(--blue);text-decoration:underline}
+.region-links small{font-size:11px;color:var(--blue);background:#edf2ff;border-radius:4px;padding:2px 6px;margin-left:6px}
+@media(max-width:1000px){.region-hub{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.region-hub{grid-template-columns:1fr;gap:16px}}
