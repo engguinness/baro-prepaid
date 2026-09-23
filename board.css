@@ -79,3 +79,6 @@ a.post-card:hover{box-shadow:0 14px 30px #17223b14;transform:translateY(-2px)}
   .prose table{display:block;overflow-x:auto;font-size:14px}
   .prose th,.prose td{padding:10px 8px}
 }
+
+/* 상단 메뉴: 글 페이지에서 「게시판」을 현재 구역으로 표시 (목록은 styles.css 의 aria-current=page 규칙) */
+.nav a[aria-current=true]{color:#2b55ed;font-weight:800}
