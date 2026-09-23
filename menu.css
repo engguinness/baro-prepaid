@@ -1,0 +1,42 @@
+/* 1분선불폰 모바일·태블릿 메뉴 (폭 1024px 이하)
+   상단 메뉴 줄 대신 ≡ 버튼 → 오른쪽에서 메뉴가 나온다.
+   <html> 에 menu-js 가 붙었을 때만 적용한다 — 스크립트가 없으면 예전 메뉴 줄이 그대로 보인다. */
+.menu-toggle,.menu-head,.menu-backdrop,.nav nav .menu-cta{display:none}
+
+@media (max-width:1024px){
+  html.menu-js{scroll-padding-top:90px}
+  html.menu-js header{height:72px}
+  html.menu-js body .nav{flex-wrap:nowrap;gap:10px;padding-top:0;padding-bottom:0}
+  html.menu-js .nav .button.small{margin-left:auto}
+
+  /* ≡ 버튼 */
+  html.menu-js .menu-toggle{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;flex-shrink:0;width:44px;height:44px;padding:0;border:1px solid #dfe5ef;border-radius:10px;background:#fff;color:#17223b}
+  html.menu-js .menu-toggle span{display:block;width:20px;height:2px;border-radius:2px;background:currentColor}
+  html.menu-js .menu-toggle:hover{border-color:#2b55ed;color:#2b55ed}
+
+  /* 오른쪽 메뉴 */
+  html.menu-js body .nav nav{position:fixed;top:0;right:0;bottom:0;z-index:60;order:0;display:flex;flex-direction:column;gap:0;width:min(320px,86vw);height:100vh;height:100dvh;margin:0;padding:0 0 calc(24px + env(safe-area-inset-bottom));overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;white-space:normal;background:#fff;box-shadow:-18px 0 40px rgba(23,34,59,.18);font-size:17px;font-weight:700;transform:translateX(100%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s}
+  html.menu-open body .nav nav{transform:none;visibility:visible;transition:transform .25s ease}
+  html.menu-js body .nav nav a{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:14px 24px;border-bottom:1px solid #edf0f6;white-space:normal}
+  html.menu-js body .nav nav a:not(.menu-cta)::after{content:'›';color:#9aa6bb;font-weight:500;font-size:20px;line-height:1}
+  html.menu-js body .nav nav a[aria-current]{color:#2b55ed;background:#f4f7ff}
+  html.menu-js .menu-head{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;height:72px;padding:0 14px 0 24px;border-bottom:1px solid #edf0f6}
+  html.menu-js .menu-head strong{font-size:14px;color:#627089;letter-spacing:.04em}
+  html.menu-js .menu-close{display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:10px;background:none;color:#17223b;font-size:30px;line-height:1}
+  html.menu-js .menu-close:hover{background:#f3f6fd}
+  html.menu-js body .nav nav .menu-cta{display:flex;justify-content:center;gap:10px;min-height:52px;margin:24px 24px 0;padding:14px 18px;border:1px solid #2b55ed;border-bottom:1px solid #2b55ed;border-radius:10px;background:#2b55ed;color:#fff;font-size:16px}
+
+  /* 뒤 배경 어둡게 */
+  html.menu-js .menu-backdrop{display:block;position:fixed;inset:0;z-index:55;background:rgba(23,34,59,.45);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s linear .25s}
+  html.menu-open .menu-backdrop{opacity:1;visibility:visible;transition:opacity .25s ease}
+  html.menu-open,html.menu-open body{overflow:hidden}
+  html.menu-open header{z-index:60}
+}
+
+@media (max-width:360px){
+  html.menu-js .nav .button.small{padding:9px 8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html.menu-js body .nav nav,html.menu-js .menu-backdrop{transition:none}
+}
