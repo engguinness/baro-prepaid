@@ -1,0 +1,81 @@
+/* 1분선불폰 게시판(글) 전용 스타일 — styles.css/center.css 는 건드리지 않는다.
+   색 토큰(--blue·--ink·--muted·--line·--light)은 styles.css :root 에서 이미 선언됨. */
+
+/* 목록 페이지: 카테고리 필터 */
+.post-filter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.filter-btn{display:inline-flex;align-items:center;padding:9px 20px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:14px;font-weight:700;cursor:pointer;text-decoration:none}
+.filter-btn:hover{border-color:var(--blue);color:var(--blue)}
+.filter-btn.active{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* 카드 그리드 (목록 페이지 · 관련 글) */
+.post-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.post-grid.board-grid{grid-template-columns:repeat(3,1fr)}
+.post-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;color:inherit;transition:box-shadow .15s,transform .15s}
+a.post-card:hover{box-shadow:0 14px 30px #17223b14;transform:translateY(-2px)}
+.post-card img{width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;display:block;background:var(--light)}
+.post-card-body{padding:18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.post-card-body h3{font-size:17px;line-height:1.4;letter-spacing:-.3px;margin:0}
+.post-card-body p{font-size:13px;color:var(--muted);margin:0;line-height:1.6}
+.post-card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;font-size:12px;color:#9aa6bb}
+.post-card-cat{color:var(--blue);font-weight:700}
+.post-card[hidden]{display:none}
+
+/* 글 본문 페이지 */
+.post-meta{color:var(--muted);font-size:14px;margin:14px 0 0}
+.post-thumb{width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;border-radius:18px;display:block;margin:0 0 28px;background:var(--light)}
+.lead{font-size:18px;color:var(--ink);font-weight:500;line-height:1.75;margin:0 0 26px}
+
+.post-summary{margin:0 0 30px}
+.post-summary strong{display:block;font-size:15px;color:var(--ink);margin-bottom:10px}
+.post-summary ul{list-style:none;margin:0;padding:0}
+.post-summary li{position:relative;padding:7px 0 7px 24px;font-size:15px;color:var(--muted)}
+.post-summary li:before{content:'✓';position:absolute;left:0;color:var(--blue);font-weight:800}
+
+.post-toc{background:var(--light);border-radius:14px;padding:22px 26px;margin:0 0 40px}
+.post-toc strong{display:block;font-size:13px;color:var(--blue);letter-spacing:.03em;margin-bottom:10px}
+.post-toc ol{margin:0;padding-left:20px;font-size:15px;color:var(--ink)}
+.post-toc li{margin:6px 0}
+.post-toc a{border-bottom:1px solid transparent}
+.post-toc a:hover{border-bottom-color:currentColor}
+
+.post-sections h2{font-size:24px;letter-spacing:-.6px;margin:46px 0 16px;scroll-margin-top:110px}
+.post-sections>h2:first-child{margin-top:0}
+.prose p{font-size:16px;line-height:1.85}
+.prose ul,.prose ol{margin:14px 0;padding-left:22px;font-size:16px;line-height:1.85;color:var(--muted)}
+.prose li{margin:6px 0}
+.prose strong{color:var(--ink)}
+.prose a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.prose table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px}
+.prose th,.prose td{padding:13px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+.prose thead th{background:var(--light);font-weight:700;color:var(--ink)}
+.prose td{color:var(--muted)}
+
+.post-cta{margin:48px 0}
+.post-cta .cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:6px}
+.post-cta .cta-actions>a{min-width:200px}
+
+.post-faq{margin:48px 0 0}
+.post-faq h2{font-size:26px;margin:0 0 6px}
+
+.post-related{margin:56px 0 0}
+.post-related h2{font-size:24px;margin:0 0 20px}
+
+.post-links{margin:48px 0 0;padding-top:32px;border-top:1px solid var(--line)}
+.post-links h2{font-size:20px;margin:0 0 16px}
+.post-links ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.post-links a{display:block;padding:15px 18px;border:1px solid var(--line);border-radius:12px;color:var(--blue);font-weight:700;font-size:15px}
+.post-links a:hover{background:var(--light)}
+
+@media(max-width:1000px){
+  .post-grid.board-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .post-grid,.post-grid.board-grid{grid-template-columns:1fr}
+  .lead{font-size:16px}
+  .post-sections h2{font-size:21px;margin:36px 0 14px}
+  .post-toc{padding:18px 20px}
+  .post-cta .cta-actions{flex-direction:column;align-items:stretch}
+  .post-cta .cta-actions>a{min-width:0}
+  .prose table{display:block;overflow-x:auto;font-size:14px}
+  .prose th,.prose td{padding:10px 8px}
+}
