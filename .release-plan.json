@@ -1,12 +1,20 @@
 {
- "released": 1,
- "history": [],
+ "released": 2,
+ "history": [
+  {
+   "date": "2026-09-28",
+   "wave": 2,
+   "urls": 12,
+   "reason": "사용자 요청: 지금부터 단계적 검색 공개 시작",
+   "indexnow": "pending deployment verification"
+  }
+ ],
  "waves": 12,
  "wave_size": {
   "first": 18,
   "rest": 12
  },
- "hold": {
+ "previous_hold": {
   "until": "2026-10-13",
   "reason": "대표 결정 2026-09-22: 1차수 18장 3주 관찰 후 판정. launchd 자동 공개 unload 상태. 재개: launchctl load ~/Library/LaunchAgents/com.1mintelecom.release-regions.plist"
  }
