@@ -6,7 +6,8 @@
    "wave": 2,
    "urls": 12,
    "reason": "사용자 요청: 지금부터 단계적 검색 공개 시작",
-   "indexnow": "pending deployment verification"
+   "indexnow": {"endpoint": "https://api.indexnow.org/indexnow", "status": 200, "urls": 12},
+   "deployment_verified": true
   }
  ],
  "waves": 12,
