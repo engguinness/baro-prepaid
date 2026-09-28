@@ -6,6 +6,7 @@ on:
 permissions:
   contents: write
   pages: write
+  actions: write
 concurrency:
   group: daily-region-release
   cancel-in-progress: false
@@ -20,6 +21,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test daily limit and retry behavior
+        run: python -m unittest discover -s .github/scripts -p 'test_*.py'
       - name: Prepare next five pages or resume an unfinished batch
         id: prepare
         run: python .github/scripts/release_daily.py prepare
@@ -46,6 +49,13 @@ jobs:
           git add .daily-release.json
           git commit -m 'Record live deployment and IndexNow receipt'
           git push origin HEAD:main
+      - name: Stop schedule when all pages are released
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(jq -r '.complete' .daily-release.json)" = 'true' ]; then
+            gh api --method PUT repos/${{ github.repository }}/actions/workflows/daily-region-release.yml/disable
+          fi
       - name: Run summary
         if: always()
         run: |
