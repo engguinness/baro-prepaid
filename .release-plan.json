@@ -6,7 +6,11 @@
    "wave": 2,
    "urls": 12,
    "reason": "사용자 요청: 지금부터 단계적 검색 공개 시작",
-   "indexnow": {"endpoint": "https://api.indexnow.org/indexnow", "status": 200, "urls": 12},
+   "indexnow": {
+    "endpoint": "https://api.indexnow.org/indexnow",
+    "status": 200,
+    "urls": 12
+   },
    "deployment_verified": true
   }
  ],
@@ -18,5 +22,42 @@
  "previous_hold": {
   "until": "2026-10-13",
   "reason": "대표 결정 2026-09-22: 1차수 18장 3주 관찰 후 판정. launchd 자동 공개 unload 상태. 재개: launchctl load ~/Library/LaunchAgents/com.1mintelecom.release-regions.plist"
- }
+ },
+ "released_paths": [
+  "지역/서울-강동구-선불폰.html",
+  "지역/서울-광진구-선불폰.html",
+  "지역/서울-구로구-선불폰.html",
+  "지역/서울-금천구-선불폰.html",
+  "지역/서울-마포구-선불폰.html",
+  "지역/서울-성북구-선불폰.html",
+  "지역/서울-송파구-선불폰.html",
+  "지역/서울-영등포구-선불폰.html",
+  "지역/서울-중구-선불폰.html",
+  "지역/서울-중랑구-선불폰.html",
+  "지역/경기-고양시-선불폰.html",
+  "지역/경기-광명시-선불폰.html",
+  "지역/경기-부천시-선불폰.html",
+  "지역/경기-수원시-선불폰.html",
+  "지역/경기-시흥시-선불폰.html",
+  "지역/경기-안산시-선불폰.html",
+  "지역/경기-안성시-선불폰.html",
+  "지역/경기-양평군-선불폰.html",
+  "지역/오산시선불폰.html",
+  "지역/용인시선불폰.html",
+  "지역/의정부시선불폰.html",
+  "지역/이천시선불폰.html",
+  "지역/파주시선불폰.html",
+  "지역/평택시선불폰.html",
+  "지역/가산동선불폰.html",
+  "지역/구로동선불폰.html",
+  "지역/방이동선불폰.html",
+  "지역/상봉동선불폰.html",
+  "지역/서교동선불폰.html",
+  "지역/서울성내동선불폰.html",
+  "지역/영등포동3가선불폰.html",
+  "지역/을지로3가선불폰.html",
+  "지역/서울자양동선불폰.html",
+  "지역/장위동선불폰.html",
+  "지역/중곡동선불폰.html"
+ ]
 }
