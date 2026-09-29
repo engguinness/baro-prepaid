@@ -1,12 +1,6 @@
 {
   "last_release_date": "2026-09-29",
-  "pending": [
-    "지역/영등포동3가선불폰.html",
-    "지역/을지로3가선불폰.html",
-    "지역/서울자양동선불폰.html",
-    "지역/장위동선불폰.html",
-    "지역/중곡동선불폰.html"
-  ],
+  "pending": [],
   "remaining": 115,
   "complete": false,
   "order": [
@@ -171,7 +165,8 @@
         "지역/장위동선불폰.html",
         "지역/중곡동선불폰.html"
       ],
-      "status": "pending"
+      "status": "submitted",
+      "indexnow": 200
     }
   ]
 }
