@@ -8,6 +8,7 @@ import sys
 import time
 import urllib.parse as U
 import urllib.request as R
+from urllib.error import HTTPError
 import xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
 
@@ -57,6 +58,17 @@ def prepare():
             f.write(f'pending={str(active).lower()}\n')
     print(json.dumps({'pending': state.get('pending', []), 'remaining': state['remaining'], 'complete': state['complete']}, ensure_ascii=False))
 
+def notify_naver(body):
+    """Send the same IndexNow body to Naver directly; never fail the job, return the status or error."""
+    req = R.Request('https://searchadvisor.naver.com/indexnow', data=body, headers={'Content-Type': 'application/json; charset=utf-8'}, method='POST')
+    try:
+        with R.urlopen(req, timeout=30) as response:
+            return response.status
+    except HTTPError as e:
+        return e.code
+    except Exception as e:
+        return f'error: {type(e).__name__}: {e}'[:200]
+
 def notify():
     state = json.loads(STATE.read_text())
     paths = state.get('pending', [])
@@ -81,14 +93,16 @@ def notify():
             time.sleep(15)
     key = '8a9a3f47c059d4cc1e1c80d5ab1fa48e'
     assert R.urlopen(SITE + '/' + key + '.txt', timeout=20).read().decode().strip() == key
-    req = R.Request('https://api.indexnow.org/indexnow', data=json.dumps({'host': '1mintelecom.com', 'key': key, 'keyLocation': SITE + '/' + key + '.txt', 'urlList': urls}).encode(), headers={'Content-Type': 'application/json'}, method='POST')
+    body = json.dumps({'host': '1mintelecom.com', 'key': key, 'keyLocation': SITE + '/' + key + '.txt', 'urlList': urls}).encode()
+    req = R.Request('https://api.indexnow.org/indexnow', data=body, headers={'Content-Type': 'application/json'}, method='POST')
     with R.urlopen(req, timeout=30) as response:
         assert response.status in (200, 202)
         state['history'][-1].update(status='submitted', indexnow=response.status)
+    state['history'][-1]['naver'] = notify_naver(body)
     state['pending'] = []
     state['complete'] = state['remaining'] == 0
     save(state)
-    print('Deployment verified and IndexNow accepted:', len(urls))
+    print('Deployment verified and IndexNow accepted:', len(urls), '| Naver:', state['history'][-1]['naver'])
 
 if __name__ == '__main__':
     {'prepare': prepare, 'notify': notify}[sys.argv[1]]()
