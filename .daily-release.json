@@ -1,7 +1,13 @@
 {
-  "last_release_date": "2026-09-30",
-  "pending": [],
-  "remaining": 110,
+  "last_release_date": "2026-10-01",
+  "pending": [
+    "지역/마두동선불폰.html",
+    "지역/마평동선불폰.html",
+    "지역/심곡동선불폰.html",
+    "지역/양평읍선불폰.html",
+    "지역/원동선불폰.html"
+  ],
+  "remaining": 105,
   "complete": false,
   "order": [
     "지역/서울-강동구-선불폰.html",
@@ -179,6 +185,17 @@
       ],
       "status": "submitted",
       "indexnow": 200
+    },
+    {
+      "date": "2026-10-01",
+      "paths": [
+        "지역/마두동선불폰.html",
+        "지역/마평동선불폰.html",
+        "지역/심곡동선불폰.html",
+        "지역/양평읍선불폰.html",
+        "지역/원동선불폰.html"
+      ],
+      "status": "pending"
     }
   ]
 }
