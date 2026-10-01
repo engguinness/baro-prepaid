@@ -1,12 +1,6 @@
 {
   "last_release_date": "2026-10-01",
-  "pending": [
-    "지역/마두동선불폰.html",
-    "지역/마평동선불폰.html",
-    "지역/심곡동선불폰.html",
-    "지역/양평읍선불폰.html",
-    "지역/원동선불폰.html"
-  ],
+  "pending": [],
   "remaining": 105,
   "complete": false,
   "order": [
@@ -195,7 +189,8 @@
         "지역/양평읍선불폰.html",
         "지역/원동선불폰.html"
       ],
-      "status": "pending"
+      "status": "submitted",
+      "indexnow": 200
     }
   ]
 }
