@@ -11,3 +11,4 @@
 .footer-links strong{color:var(--ink);font-weight:600;margin-right:8px}
 .footer-links a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 .footer-links a:hover{color:var(--blue)}
+.button.ghost-white{background:transparent;color:#fff;border-color:#fff}.button.ghost-white:hover{background:#ffffff26}.visit-action .button+.button{margin-left:10px}@media(max-width:760px){.visit-action .button{display:flex}.visit-action .button+.button{margin:10px 0 0}}

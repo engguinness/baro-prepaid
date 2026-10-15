@@ -16,7 +16,8 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="styles.css?v=20260921">
-<link rel="stylesheet" href="center.css?v=20260922">
+<link rel="stylesheet" href="center.css?v=20261015">
+<link rel="stylesheet" href="visit-form.css?v=20261015">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-82QQEGP3VG"></script>
@@ -51,6 +52,8 @@ gtag('js',new Date());gtag('config','G-82QQEGP3VG');</script>
   <p id="result-state">현재 위치를 쓰거나 지역을 입력하시면 가까운 센터를 최대 3곳까지 보여드립니다.</p>
   <ul id="result-list" hidden></ul>
 
+  <p class="center-direct"><button type="button" id="reserve-direct" class="button">센터를 고르지 않고 바로 예약 신청</button></p>
+
   <p class="center-note">
     · 센터 위치는 <strong>시·구·동까지만</strong> 안내합니다. 정확한 주소와 방문 시간은 예약 확인 후 카카오톡으로 알려드립니다.<br>
     · 거리는 지역 중심 기준으로 계산한 <strong>대략적인 값</strong>입니다.<br>
@@ -60,55 +63,7 @@ gtag('js',new Date());gtag('config','G-82QQEGP3VG');</script>
 </section>
 </main>
 
-<dialog id="reserve-dialog">
-  <div class="reserve-head">
-    <h2>센터 방문 예약</h2>
-    <p>아래를 채우시면 카카오톡으로 보낼 내용이 만들어집니다.</p>
-  </div>
-  <form id="reserve-form">
-    <input type="hidden" id="r-center">
-    <div>
-      <label for="r-name">이름</label>
-      <input type="text" id="r-name" required autocomplete="name" placeholder="홍길동">
-    </div>
-    <div class="row">
-      <div>
-        <label for="r-phone">연락처</label>
-        <input type="tel" id="r-phone" required autocomplete="tel" inputmode="numeric" placeholder="010-0000-0000">
-      </div>
-      <div>
-        <label for="r-birth">생년월일</label>
-        <input type="text" id="r-birth" required inputmode="numeric" placeholder="1990-01-01">
-      </div>
-    </div>
-    <div>
-      <label for="r-plan">요금제</label>
-      <select id="r-plan" required>
-        <option value="">선택해 주세요</option>
-        <option>잘 모르겠어요 · 상담 후 결정할게요</option>
-        <option>월 12,100원 · 본인인증용 최저가</option>
-        <option>선불 396 10.3G · 월 39,600원</option>
-        <option>L망 5G 20GB+ · 월 46,400원</option>
-        <option>선불 770 · 월 77,000원</option>
-        <option>LTE 비디오 / 매일 5GB · 월 85,900원</option>
-      </select>
-    </div>
-    <div>
-      <label for="r-where">현재 위치</label>
-      <input type="text" id="r-where" required placeholder="예: 서울 마포구">
-    </div>
-    <p class="privacy-note">
-      입력하신 내용은 <strong>이 기기 안에서만</strong> 쓰입니다. 저장하거나 서버로 보내지 않으며,
-      복사된 내용을 대표님이 직접 카카오톡에 붙여넣어 보내시는 방식입니다.
-    </p>
-    <textarea id="r-fallback" rows="7" hidden readonly aria-label="복사할 내용"></textarea>
-    <p id="copy-note"></p>
-    <div class="reserve-actions">
-      <button type="button" id="reserve-close" class="ghost-button">닫기</button>
-      <button type="submit" class="button">내용 복사하고 카카오톡 열기</button>
-    </div>
-  </form>
-</dialog>
+<dialog id="visit-dialog" class="vf-dialog" aria-label="센터 방문 예약 신청"></dialog>
 
 <footer><div class="container footer-inner"><a class="brand" href="/">1분선불폰</a><p>정보 안내 브랜드 · 신청·인증·개통은 연결된 외부 사이트에서 진행</p><p><a href="https://www.instagram.com/1min_ntelecom/" target="_blank" rel="noopener" style="white-space:nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:5px"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>인스타그램<span class="sr"> (새 창)</span></a> · <a href="https://www.threads.com/@1min_ntelecom" target="_blank" rel="noopener" style="white-space:nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:5px"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>스레드<span class="sr"> (새 창)</span></a></p><small>© 1분선불폰</small></div><div class="container footer-links"><p><strong>주요 지역 선불폰 개통 안내</strong><a href="/지역/강남구선불폰.html">강남구</a> · <a href="/지역/서울-송파구-선불폰.html">송파구</a> · <a href="/지역/서울-마포구-선불폰.html">마포구</a> · <a href="/지역/경기-수원시-선불폰.html">수원시</a> · <a href="/지역/경기-고양시-선불폰.html">고양시</a> · <a href="/지역/부산진구선불폰.html">부산진구</a> · <a href="/지역/해운대구선불폰.html">해운대구</a> · <a href="/지역/달서구선불폰.html">대구 달서구</a> · <a href="/지역/부평구선불폰.html">인천 부평구</a> · <a href="/지역/대전중구선불폰.html">대전 중구</a> · <a href="/지역/광주서구선불폰.html">광주 서구</a> · <a href="/지역/창원시선불폰.html">창원시</a> · <a href="/지역.html">전국 150곳 전체 보기</a></p><p><strong>안내</strong><a href="/plans.html">요금제</a> · <a href="/usim.html">유심 준비</a> · <a href="/activation.html">개통 방법</a> · <a href="/center.html">센터 찾기</a> · <a href="/글.html">선불폰 정보</a> · <a href="/about.html">소개</a></p></div></footer>
 <div class="floating">
@@ -120,8 +75,10 @@ gtag('js',new Date());gtag('config','G-82QQEGP3VG');</script>
   <a href="https://www.n-telecom.co.kr/gnsmall" class="button" target="_blank" rel="noopener noreferrer">온라인 개통 ↗</a>
 </div>
 <script src="centers.js?v=20260921"></script>
-<script src="center.js?v=20260921" defer></script>
-<script src="track.js?v=20260921" defer></script>
+<script>window.VISIT_FORM_CONFIG={site:"1min",brand:"1분선불폰",api:"https://modutelecom.com/wp-json/modu/v1/visit-request",kakao:"https://pf.kakao.com/_TWxfaX/chat",phone:"",phoneHref:"",hours:"08:00~22:00"};</script>
+<script src="visit-form.js?v=20261015" defer></script>
+<script src="center.js?v=20261015" defer></script>
+<script src="track.js?v=20261015" defer></script>
 <script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
 <script type="text/javascript">
 if(!wcs_add) var wcs_add = {};

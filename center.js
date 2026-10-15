@@ -1,6 +1,7 @@
 /* 센터 찾기 — 현재 위치 또는 입력한 지역에서 가까운 센터를 거리순 최대 3곳 보여준다.
-   개인정보: 위치·이름·연락처·생년월일은 서버로 보내지 않는다. 브라우저 안에서만 쓰고,
-   예약 시 사용자가 직접 카카오톡에 붙여넣는다. 저장도 하지 않는다. */
+   개인정보: 현재 위치(좌표)와 입력한 지역은 이 브라우저 안에서만 쓰고 서버로 보내지 않는다. 저장도 하지 않는다.
+   「예약하기」를 누르면 visit-form.js 의 방문 예약 신청 창이 열린다. 거기서 고객이 직접 적어 신청한
+   성함·생년월일·연락번호 등은 접수용 서버로만 전송되며, 이 파일은 그 값을 다루지 않는다. */
 (() => {
   const KAKAO_CHAT = 'https://pf.kakao.com/_TWxfaX/chat';
   const MAX_RESULTS = 3;
@@ -10,8 +11,6 @@
   const form = $('#search-form'), input = $('#location-input');
   const btnGeo = $('#use-my-location'), list = $('#result-list');
   const state = $('#result-state'), summary = $('#result-summary');
-  const dialog = $('#reserve-dialog'), rForm = $('#reserve-form');
-  const fCenter = $('#r-center'), fWhere = $('#r-where'), copyNote = $('#copy-note');
 
   // 지역명 자동완성 (시·구·동 단위 그대로)
   [...new Set(data.map((c) => c.location))].sort().forEach((loc) => {
@@ -181,41 +180,16 @@
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 });
   });
 
-  // ---- 예약 ----
+  // ---- 예약 ---- (폼·검증·전송은 visit-form.js 가 맡는다)
   function openReserve(location) {
-    fCenter.value = location;
-    if (!fWhere.value) fWhere.value = location;
-    copyNote.textContent = '';
-    if (typeof dialog.showModal === 'function') dialog.showModal();
-    else dialog.setAttribute('open', '');
+    if (window.VisitForm) { window.VisitForm.open({ region: location }); return; }
+    window.open(KAKAO_CHAT, '_blank', 'noopener');   // 예약 모듈을 못 불러왔을 때는 카카오톡 상담으로
   }
-  $('#reserve-close').addEventListener('click', () => dialog.close());
-
-  rForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const v = (id) => $(id).value.trim();
-    const text =
-      '[센터 방문 예약 신청]\n' +
-      `희망 센터: ${fCenter.value}\n` +
-      `이름: ${v('#r-name')}\n` +
-      `연락처: ${v('#r-phone')}\n` +
-      `생년월일: ${v('#r-birth')}\n` +
-      `요금제: ${v('#r-plan')}\n` +
-      `현재 위치: ${v('#r-where')}\n` +
-      '\n확인 후 방문 가능한 시간 안내 부탁드립니다.';
-
-    let copied = false;
-    try {
-      await navigator.clipboard.writeText(text);
-      copied = true;
-    } catch (_) {
-      const ta = $('#r-fallback');
-      ta.value = text; ta.hidden = false; ta.select();
-      try { copied = document.execCommand('copy'); } catch (__) { copied = false; }
-    }
-    copyNote.textContent = copied
-      ? '신청 내용을 복사했습니다. 카카오톡 채팅창이 열리면 붙여넣기(길게 눌러 붙여넣기) 후 보내주세요.'
-      : '아래 내용을 직접 복사해서 카카오톡에 붙여넣어 주세요.';
-    window.open(KAKAO_CHAT, '_blank', 'noopener');
-  });
+  const direct = $('#reserve-direct');
+  if (direct) {
+    direct.addEventListener('click', () => {
+      if (window.VisitForm) window.VisitForm.open({});
+      else window.open(KAKAO_CHAT, '_blank', 'noopener');
+    });
+  }
 })();
