@@ -149,3 +149,24 @@
   .region-table td{border-bottom:0;padding-top:0}
   .region-table-wrap{padding:6px 4px}
 }
+
+/* 지역 고유 글 페이지 (2026-10-20) — 소제목 아래 문단과 센터 이용 안내 */
+.region-prose p{margin:0 0 14px;font-size:16px;line-height:1.9;color:var(--ink)}
+.region-prose p:last-child{margin-bottom:0}
+.region-guide{margin-top:26px;padding:22px 26px;background:var(--light);border:1px solid #dbe3f5;border-left:5px solid var(--blue);border-radius:14px}
+.region-guide p{margin:0;font-size:15.5px;line-height:1.9;color:var(--ink)}
+.region-glance-links{margin:18px 0 0;line-height:2.1}
+.region-glance-links .text-link{white-space:nowrap}
+/* 2026-10-20 quick 문단 · 센터 카드 이름표 · 링크 줄만 있을 때(quick 이 아직 없는 글) */
+.region-quick{margin:0;font-size:16px;line-height:1.9;color:var(--ink)}
+.region-summary+.region-glance-links{margin-top:20px}
+.region-page .region-links-only{padding-top:26px;padding-bottom:26px}
+.region-links-only .region-glance-links{margin:0}
+.region-tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+.region-tags span{background:#edf2ff;color:#2f4a9e;border-radius:999px;padding:5px 13px;font-size:13px;font-weight:700;line-height:1.5}
+@media(max-width:760px){
+  .region-prose p{font-size:15px}
+  .region-guide{padding:18px 18px}
+  .region-guide p{font-size:15px}
+  .region-quick{font-size:15px}
+}
