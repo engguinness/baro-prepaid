@@ -23,7 +23,14 @@
         placement: placement(a),
         page: location.pathname,
       });
-return;
+      return;
+    }
+    // info.n-telecom.co.kr 는 신청 페이지가 아니라 앤텔레콤 안내 페이지(사전승낙 마크·공식 요금제 목록·센터 안내)다.
+    // 신청 클릭(activation_click, 회사OS activation_clicks 의 원천)에 섞이지 않게 따로 센다. (2026-10-21)
+    if (href.includes('info.n-telecom.co.kr')) {
+      const kind = href.includes('/customers/') ? 'cert' : href.includes('/products/all.asp') ? 'plans' : 'info';
+      send('n_telecom_info_click', { kind: kind, placement: placement(a), page: location.pathname });
+      return;
     }
     if (href.includes('n-telecom.co.kr')) {
       send('activation_click', { placement: placement(a), page: location.pathname });

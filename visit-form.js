@@ -1,7 +1,7 @@
 /* 센터 방문 예약 신청 폼 — 공용 모듈 (외부 라이브러리 없음, ES2018)
 
    사용:  VisitForm.open({region: '서울 금천구 가산동'})  /  VisitForm.close()
-   설정:  window.VISIT_FORM_CONFIG = {site, brand, api, kakao, phone, phoneHref, hours}
+   설정:  window.VISIT_FORM_CONFIG = {site, brand, api, kakao, phone, phoneHref, hours, privacyUrl(선택: 개인정보처리방침 주소)}
    이벤트: 접수 성공 시 document 에 'visit:submitted' (detail 에 개인정보 없음)
 
    개인정보: 성함·생년월일·연락번호·특이사항은 접수 API(POST)로만 보낸다.
@@ -11,7 +11,7 @@
 
   var FONT_FAMILY = '"Noto Sans KR","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif';
   var DEFAULT_CFG = {
-    site: '1min', brand: '1분선불폰', api: '', kakao: '', phone: '', phoneHref: '', hours: '08:00~22:00'
+    site: '1min', brand: '1분선불폰', api: '', kakao: '', phone: '', phoneHref: '', hours: '08:00~22:00', privacyUrl: ''
   };
   var PLAN_ASK = '상담 후 결정';
   var PLAN_CUSTOM = '__custom__';
@@ -207,16 +207,22 @@
         (top ? '' : regionBlock('', false)) +
         // 9. 특이사항
         '<div class="vf-field" data-field="note"><label for="vf-note">특이사항 <span class="vf-opt">(선택)</span></label>' +
-          '<textarea id="vf-note" class="vf-control" name="note" rows="3" maxlength="60" placeholder="예: 미납 정지 단말기 사용 중 · eSIM 희망 · 외국인(여권 지참)"></textarea>' +
+          '<textarea id="vf-note" class="vf-control" name="note" rows="3" maxlength="60" placeholder="예: 미납 정지 단말기 사용 중 · eSIM 희망 · 외국인 센터 방문"></textarea>' +
           '<p class="vf-count" id="vf-count">남은 글자 60자</p>' + errP('note') + '</div>' +
         // 10. 개인정보 동의
         '<div class="vf-field vf-consent" data-field="consent">' +
           '<label class="vf-check"><input type="checkbox" id="vf-consent" name="consent"><span>개인정보 수집·이용에 동의합니다 <b>(필수)</b></span></label>' +
           '<details class="vf-details"><summary>수집·이용 안내 보기</summary>' +
-            '<p><b>수집 항목</b> 성함, 생년월일, 연락번호, 희망 요금제·방문 일시, 특이사항(번호이동 시 현재 번호·통신사)<br>' +
+            '<p><b>수집 항목</b> 성함, 생년월일, 연락번호, 통신망, 요금제, 선불/후불, 신규/번호이동 구분(번호이동 시 현재 번호·통신사), ' +
+            '방문 일시, 희망 지역·특이사항(선택), 접속 IP(자동 기록)<br>' +
             '<b>이용 목적</b> 방문 개통 예약 접수와 상담 연락<br>' +
             '<b>보유 기간</b> 예약 처리(개통 또는 취소) 완료 후 지체 없이 파기<br>' +
-            '동의하지 않으면 예약 신청을 할 수 없습니다.</p></details>' +
+            '<b>저장·전달</b> 접수 내용은 운영자의 접수 서버(WordPress.com 호스팅)에 저장되고, 운영자 전용 텔레그램(Telegram) 대화로 ' +
+            '전달됩니다. 해외 서비스를 거치게 됩니다.<br>' +
+            '<b>센터 전달</b> 예약이 확정되면 방문할 앤텔레콤 개통 센터에 성함·생년월일·연락번호·망·요금제·가입 유형·방문 일시를 전달합니다.<br>' +
+            '동의하지 않으면 예약 신청을 할 수 없습니다.' +
+            (cfg.privacyUrl ? '<br><a href="' + esc(cfg.privacyUrl) + '" target="_blank" rel="noopener noreferrer">개인정보처리방침 보기</a>' : '') +
+            '</p></details>' +
           errP('consent') + '</div>' +
         // 11. 숨은 칸 (봇 함정)
         '<div class="vf-hp" aria-hidden="true"><label>웹사이트 <input type="text" id="vf-hp" name="website" tabindex="-1" autocomplete="off"></label></div>' +
@@ -692,7 +698,7 @@
       var INFO_PAD = 34, BUL_X = 30, BUL_W = TEXT_W - INFO_PAD * 2 - BUL_X - 6, BUL_LH = 40, BUL_GAP = 14;
       var bullets = [
         { t: '예약 확정은 상담 후 안내드립니다 (상담 ' + cfg.hours + ')', w: 700 },
-        { t: '방문 시 신분증(실물)을 꼭 챙겨 주세요. 외국인은 여권을 지참해 주세요.', w: 500 },
+        { t: '방문 시 신분증(실물)을 꼭 챙겨 주세요. 외국인은 접수할 수 있는 신분 서류를 예약 때 확인해 주세요.', w: 500 },
         { t: '센터 위치는 예약 확정 때 안내드립니다.', w: 500 }
       ];
       bullets.forEach(function (b) { m.font = F(b.w, 28); b.lines = wrapLines(m, b.t, BUL_W); });

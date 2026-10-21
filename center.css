@@ -170,3 +170,56 @@
   .region-guide p{font-size:15px}
   .region-quick{font-size:15px}
 }
+
+/* 2026-10-21 지역 페이지 수정기획서 — 표(가로 스크롤 컨테이너)·히어로 CTA·상황별 링크·최종 업데이트·시도 허브·방침 페이지 */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:16px;background:#fff;max-width:100%}
+.table-scroll .region-table,.table-scroll .data-table{border:0}
+.table-scroll .region-table{table-layout:auto}
+.data-table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:540px}
+.data-table th,.data-table td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);line-height:1.6}
+.data-table thead th{background:var(--light);font-weight:700;color:var(--ink);white-space:nowrap}
+.data-table tbody th{font-weight:700;color:var(--ink)}
+.data-table td{color:var(--muted)}
+.data-table td strong{color:var(--ink)}
+.data-table tbody tr:last-child th,.data-table tbody tr:last-child td{border-bottom:0}
+.table-note{margin:14px 0 0;font-size:13.5px;line-height:1.8;color:var(--muted)}
+.region-hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.region-hero-cta .button,.region-hero-cta .outline-button{display:inline-flex;align-items:center;justify-content:center;padding:15px 22px;border-radius:10px;font-size:15px;font-weight:700}
+.region-hero-cta .outline-button{background:#fff;border:1px solid #b9c6e6;color:var(--ink)}
+.region-hero-cta .outline-button:hover{background:#edf2ff}
+.region-hero-cta small{display:block;font-size:12px;font-weight:500;opacity:.85;margin-top:2px}
+.who-grid .info-card h3{margin:12px 0 8px}
+.who-grid .info-card p{font-size:15px;line-height:1.8}
+.link-desc{display:block;font-size:13px;color:var(--muted);line-height:1.6;margin-top:2px}
+.region-links.rich li{padding-top:12px;padding-bottom:12px}
+.region-links ul{list-style:none;margin:6px 0 2px;padding:0}
+.region-links ul li{border-bottom:0;padding:3px 0 3px 18px;font-size:14px}
+.region-links ul li:before{content:'·';left:4px}
+.region-sub{font-size:15px;font-weight:800;margin:22px 0 4px;color:var(--ink)}
+.region-updated{margin:16px 0 0;font-size:13px;color:var(--muted);text-align:center}
+.region-face{margin-top:22px}
+.region-face h3{font-size:17px;margin:0 0 8px}
+.region-face ul{margin:8px 0 0;padding-left:18px;font-size:15px;line-height:1.85}
+.region-visit{margin-top:22px}
+.region-visit h3{font-size:17px;margin:0 0 8px;color:var(--blue)}
+.region-visit ol{margin:8px 0 0;padding-left:20px;font-size:15px;line-height:1.85}
+.region-usim-text{font-size:15.5px;line-height:1.9}
+.hub-card{margin-bottom:22px}
+.hub-card h2{font-size:24px;margin:0 0 12px}
+.hub-card h2 small{font-size:13px;font-weight:500;color:var(--muted);margin-left:6px}
+.hub-list{columns:2;column-gap:36px}
+.hub-list>li{break-inside:avoid}
+.policy-body h2{font-size:24px;margin:38px 0 14px}
+.policy-body h2:first-child{margin-top:0}
+.policy-body p,.policy-body li{font-size:15.5px;line-height:1.9;color:var(--ink)}
+.policy-body ul,.policy-body ol{padding-left:22px;margin:8px 0 14px}
+.policy-body table{margin:6px 0 14px}
+@media(max-width:760px){
+  .region-hero-cta{flex-direction:column}
+  .region-hero-cta .button,.region-hero-cta .outline-button{width:100%}
+  .data-table{font-size:13.5px;min-width:500px}
+  .data-table th,.data-table td{padding:11px 12px}
+  .hub-list{columns:1}
+  .policy-body h2{font-size:21px}
+  .policy-body p,.policy-body li{font-size:15px}
+}
