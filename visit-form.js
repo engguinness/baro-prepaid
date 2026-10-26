@@ -25,7 +25,7 @@
   var NETWORK_TEXT = { 'KT': 'KT', 'LG': 'LG U+', 'KT/LG': 'KT · LG U+ 둘 다 상담' };
   var SUBMIT_TIMEOUT_MS = 40000;
 
-  var state = { busy: false, openedAt: 0, token: 0, receiptUrl: '', region: '' };
+  var state = { busy: false, openedAt: 0, token: 0, receiptUrl: '', region: '', ctrl: null };
 
   // ───────────────────────── 작은 도구 ─────────────────────────
   function esc(s) {
@@ -415,7 +415,7 @@
     var b = root.querySelector('#vf-submit'), f = root.querySelector('#vf-form');
     if (b) { b.disabled = on; b.textContent = on ? '접수 중…' : '예약 신청하고 접수증 받기'; }
     if (f) f.setAttribute('aria-busy', on ? 'true' : 'false');
-    root.querySelectorAll('[data-vf-close]').forEach(function (x) { x.disabled = on; });
+    // 닫기(X·닫기) 버튼은 접수 중에도 계속 눌러 닫을 수 있어야 한다. 닫으면 요청을 취소한다(close 참고).
   }
 
   function wireForm(root, cfg) {
@@ -474,6 +474,7 @@
 
     var status = 0, data = null, failure = '';
     var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+    state.ctrl = ctrl; // 접수 중 닫기를 누르면 이 요청을 취소한다
     var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, SUBMIT_TIMEOUT_MS) : 0;
     try {
       if (!cfg.api) throw new Error('no api');
@@ -490,6 +491,7 @@
       failure = e && e.name === 'AbortError' ? 'timeout' : 'network';
     }
     if (timer) clearTimeout(timer);
+    state.ctrl = null;
 
     if (token !== state.token) return; // 그 사이 창이 닫혔다 다시 열림
     setBusy(root, false);
@@ -862,7 +864,15 @@
   }
   function close() {
     var d = document.getElementById('visit-dialog');
-    if (!d || state.busy) return;
+    if (!d) return;
+    if (state.busy) {
+      // 접수 중에 닫기를 누르면 진행 중인 요청을 취소하고 닫는다.
+      // token 을 올려 늦게 오는 응답은 무시하고(성공 화면이 다시 뜨지 않게),
+      // busy 를 내려 onClosed 가 창을 다시 열지 않게 한다.
+      state.busy = false;
+      state.token++;
+      if (state.ctrl) { try { state.ctrl.abort(); } catch (e) { /* 무시 */ } state.ctrl = null; }
+    }
     if (typeof d.close === 'function') { if (d.open) d.close(); }
     else { d.removeAttribute('open'); onClosed(); }
   }
