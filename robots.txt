@@ -6,3 +6,5 @@ Allow: /
 
 Sitemap: https://1mintelecom.com/sitemap.xml
 Sitemap: https://1mintelecom.com/rss.xml
+
+#DaumWebMasterTool:56b1b7041e79bc90b947cfefe5a24717ed8af44a1fc94897391af1f23ad2654b:7v7Co2KibzUex4fH7zWmNA==
